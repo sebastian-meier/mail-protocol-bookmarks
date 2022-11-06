@@ -20,7 +20,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm run bookmark
+      - run: npm ci
+      - run: npm run bookmarks
       - run: |
           git config --global user.name "sebastian-meier"
           git config --global user.email "sebastian-meier@users.noreply.github.com"
