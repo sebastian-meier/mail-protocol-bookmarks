@@ -7,14 +7,17 @@ const allowedSenders = process.env.ALLOWED_SENDERS.split(',');
 if (!fs.existsSync('./src')) {
   fs.mkdirSync('./src');
 }
-if (!fs.existsSync('./src/assets')) {
-  fs.mkdirSync('./src/assets');
+if (!fs.existsSync('./src/site')) {
+  fs.mkdirSync('./src/site');
 }
-if (!fs.existsSync('./src/assets/screenshots')) {
-  fs.mkdirSync('./src/assets/screenshots');
+if (!fs.existsSync('./src/site/assets')) {
+  fs.mkdirSync('./src/site/assets');
 }
-if (!fs.existsSync('./src/bookmarks')) {
-  fs.mkdirSync('./src/bookmarks');
+if (!fs.existsSync('./src/site/assets/screenshots')) {
+  fs.mkdirSync('./src/site/assets/screenshots');
+}
+if (!fs.existsSync('./src/site/bookmarks')) {
+  fs.mkdirSync('./src/site/bookmarks');
 }
 
 puppeteer
@@ -34,7 +37,7 @@ puppeteer
       const bookmarks = await imapFetch(imap, res);
       for (let b = 0; b < bookmarks.length; b += 1) {
         await page.goto(bookmarks[b].url);
-        await page.screenshot({ path: `./src/assets/screenshots/${bookmarks[b].date}.png` });
+        await page.screenshot({ path: `./src/site/assets/screenshots/${bookmarks[b].date}.png` });
         const md = `---
 title: '${bookmarks[b].subject}'
 url: ${bookmarks[b].url}
@@ -42,7 +45,7 @@ image: ${bookmarks[b].date}.png
 tags: '${bookmarks[b].tags.join(',')}'
 description: '${bookmarks[b].description}'
 ---`;
-        fs.writeFileSync(`./src/bookmarks/${bookmarks[b].date}.md`, md, 'utf-8');
+        fs.writeFileSync(`./src/site/bookmarks/${bookmarks[b].date}.md`, md, 'utf-8');
       }
     }
 
@@ -75,9 +78,6 @@ const imapConnect = () => {
 
 const imapOpen = (imap) => {
   return new Promise((resolve, reject) => {
-    imap.getBoxes((err, boxes) => {
-      console.log(boxes);
-    });
     imap.openBox('INBOX', true, (err, box) => {
       if (err) {
         reject(err);
