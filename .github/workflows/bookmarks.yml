@@ -34,5 +34,4 @@ jobs:
           git add src/bookmarks/\*
           git add src/assets/screenshots/\*
           git commit -m "github-actions:bookmarks"
-          git push origin publication
-      - run: npm run clean
+          git push

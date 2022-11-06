@@ -4,8 +4,7 @@
   "description": "Bookmarking tool based on an email inbox",
   "main": "index.js",
   "scripts": {
-    "bookmarks": "node index.js",
-    "clean": "node clean.js"
+    "bookmarks": "node index.js"
   },
   "repository": {
     "type": "git",
