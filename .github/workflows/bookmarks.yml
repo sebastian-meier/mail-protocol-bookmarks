@@ -31,5 +31,5 @@ jobs:
       - run: |
           git config --global user.name "sebastian-meier"
           git config --global user.email "sebastian-meier@users.noreply.github.com"
-          git git fsck
+          git fsck
           git status --porcelain | git add . && git commit -m "github-actions:bookmarks" && git push && echo 1 || echo 0
