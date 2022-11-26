@@ -1,0 +1,47 @@
+/*----- TYPOGRAPHY ------*/
+
+$font__regular: 400;
+$font__medium: 500;
+$font__semibold: 600;
+$font__bold: 700;
+$font-headline__family: 'Hubot Sans', sans-serif;
+$font__family: 'Mona Sans', sans-serif;
+
+@font-face {
+  font-family: 'Hubot Sans';
+  src:
+    url('/fonts/Hubot-Sans/Hubot-Sans.woff2') format('woff2 supports variations'),
+    url('/fonts/Hubot-Sans/Hubot-Sans.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
+
+@font-face {
+  font-family: 'Mona Sans';
+  src:
+    url('/fonts/Mona-Sans/Mona-Sans.woff2') format('woff2 supports variations'),
+    url('/fonts/Mona-Sans/Mona-Sans.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
+
+i, em, .italic {
+	/* Should be font-style: italic; */
+	font-variation-settings: 'ital' 1;
+}
+
+.slanted {
+	/* Should be font-style: oblique 10deg; */
+	font-variation-settings: 'slnt' 10;
+}
+
+* {
+  text-rendering: optimizeLegibility;
+  font-family: $font__family;
+}
+
+h1 {
+  font-weight: 900;
+  font-stretch: 100%;
+  font-size: 48px;
+}

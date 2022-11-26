@@ -20,6 +20,8 @@ if (!fs.existsSync('./src/site/bookmarks')) {
   fs.mkdirSync('./src/site/bookmarks');
 }
 
+const escapeStr = (str) => str.split('"').join('\"');
+
 puppeteer
   .launch({
     defaultViewport: {
@@ -39,11 +41,11 @@ puppeteer
         await page.goto(bookmarks[b].url);
         await page.screenshot({ path: `./src/site/assets/screenshots/${bookmarks[b].date}.png` });
         const md = `---
-title: '${bookmarks[b].subject}'
+title: "${escapeStr(bookmarks[b].subject)}"
 url: ${bookmarks[b].url}
 image: ${bookmarks[b].date}.png
-tags: '${bookmarks[b].tags.join(',')}'
-description: '${bookmarks[b].description}'
+tags: ${JSON.stringify(bookmarks[b].tags.map(t => t.toLowerCase()))}
+description: "${escapeStr(bookmarks[b].description)}"
 ---`;
         fs.writeFileSync(`./src/site/bookmarks/${bookmarks[b].date}.md`, md, 'utf-8');
       }
